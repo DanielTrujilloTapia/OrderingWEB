@@ -108,7 +108,7 @@ export default {
         const response = await fetch("http://localhost:8081/api/v1/Auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
+          body: JSON.stringify({  
             identificador: this.identificador,
             contrasenaUsuario: this.contrasenaUsuario,
           }),
@@ -119,9 +119,11 @@ export default {
         if (!response.ok) {
           this.generalError = data.message || "Credenciales inválidas.";
         } else {
-            console.log(data.token)
+            console.log(data.token);
+            console.log(data.username);
           localStorage.setItem("token", data.token);
-          this.$router.push("/app/home");
+          localStorage.setItem("username", data.username);
+          this.$router.push("/app/order");
         }
       } catch (error) {
         this.generalError = "Error al conectar con el servidor.";

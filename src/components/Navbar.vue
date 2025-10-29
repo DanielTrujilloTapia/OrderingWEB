@@ -12,9 +12,9 @@
         <i class="bi bi-list fs-5"></i>
       </button>
 
-      <!-- Título de la vista -->
-      <h1 class="h5 fw-bold text-dark mb-0 d-flex align-items-center">
-        <i class="bi bi-speedometer2 text-primary me-2 fs-5"></i> Dashboard
+      <h1 class="h5 fw-bold mb-0 d-flex align-items-center route-title">
+        <i class="bi bi-speedometer2 me-2 fs-5"></i> 
+        {{ currentRouteName }}
       </h1>
     </div>
 
@@ -39,7 +39,7 @@
           aria-expanded="false"
         >
           <i class="bi bi-person-circle fs-5 me-2"></i>
-          <span class="fw-semibold d-none d-md-inline">Daniel P.</span>
+          <span class="fw-semibold d-none d-md-inline">{{ username }}</span>
         </button>
 
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -56,7 +56,24 @@
 <script>
 export default {
   name: 'Navbar',
-  emits: ['toggleSidebar']
+  props: {
+    currentRouteName: {
+      type: String,
+      default: 'Dashboard'
+    }
+  },
+  emits: ['toggleSidebar'],
+  data() {
+    return {
+      username: 'Usuario' // valor por defecto
+    }
+  },
+  mounted() {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      this.username = storedUsername;
+    }
+  }
 };
 </script>
 
@@ -72,6 +89,11 @@ export default {
   align-items: center;
 }
 
+/* Icono del título */
+.navbar-custom h1 i {
+  color: #033B56; /* azul que elegiste */
+}
+
 /* Botón del menú lateral */
 .toggle-btn {
   border: none;
@@ -81,6 +103,12 @@ export default {
 .toggle-btn:hover {
   background-color: #e2e6ea;
   transform: scale(1.05);
+}
+
+/* Titulo */
+.route-title,
+.route-title i {
+  color: #033B56; /* azul principal */
 }
 
 /* Notificaciones */

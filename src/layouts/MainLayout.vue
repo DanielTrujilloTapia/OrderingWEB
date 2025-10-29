@@ -5,7 +5,7 @@
     >
       <!-- HEADER -->
       <div class="sidebar-header d-flex align-items-center justify-content-between p-3 border-bottom border-light-subtle">
-        <h1 class="logo-text fs-4 fw-bolder text-info mb-0">{{ isCollapsed ? 'WO' : 'WebOrdering' }}</h1>
+        <h1 class="logo-text fs-4 fw-bolder  mb-0 ">{{ isCollapsed ? 'WO' : 'WebOrdering' }}</h1>
         <!-- <button class="btn btn-sm btn-outline-secondary border-0 p-1" @click="toggleSidebar" :title="isCollapsed ? 'Expandir' : 'Colapsar'">
           <i :class="isCollapsed ? 'bi-arrow-right-short' : 'bi-arrow-left-short'" class="fs-4"></i>
         </button> -->
@@ -73,7 +73,10 @@
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="main-content d-flex flex-column flex-grow-1 bg-light">
-      <Navbar @toggleSidebar="toggleSidebar" />
+      <Navbar 
+        @toggleSidebar="toggleSidebar" 
+        :currentRouteName="currentRouteName"
+      />
       <main class="view-container p-4 flex-grow-1 overflow-auto">
         <router-view />
       </main>
@@ -93,8 +96,8 @@ export default {
       navItems: {
         main: [
           { name: 'Dashboard', path: '/app/home', icon: 'bi-grid-fill' },
-          { name: 'Pedidos', path: '/app/createNewOrder', icon: 'bi-box-seam-fill' },
-          { name: 'Clientes', path: '/app/order', icon: 'bi-people-fill' },
+          { name: 'Mis Ordenes', path: '/app/order', icon: 'bi-box-seam-fill'},
+          { name: 'Nueva Orden', path: '/app/createNewOrder', icon: 'bi-basket3-fill'},
         ],
         management: [
           { name: 'Productos', path: '/app/products', icon: 'bi-tag-fill' },
@@ -103,6 +106,21 @@ export default {
         ]
       }
     };
+  },
+   computed: {
+    currentRouteName() {
+      const route = this.$route;
+
+      // Buscar en main
+      const mainItem = this.navItems.main.find(item => route.path.startsWith(item.path));
+      if (mainItem) return mainItem.name;
+
+      // Buscar en management
+      const managementItem = this.navItems.management.find(item => route.path.startsWith(item.path));
+      if (managementItem) return managementItem.name;
+
+      return 'Dashboard';
+    }
   },
   methods: {
     toggleSidebar() {
@@ -128,6 +146,24 @@ export default {
   width: 80px;
 }
 
+/* ===== HEADER SIDEBAR ===== */
+.sidebar-header {
+  display: flex;
+  align-items: center;       /* centra verticalmente */
+  justify-content: center;   /* centra horizontalmente */
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fff;    /* mantiene fondo blanco */
+}
+
+.sidebar-header .logo-text {
+  color: #033B56;            /* tu azul */
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  font-weight: 700;
+}
+
 /* Mantiene los íconos alineados siempre */
 .icon-wrapper {
   width: 36px; 
@@ -142,18 +178,31 @@ export default {
   align-items: center;
   padding: 10px 14px;
   border-radius: 8px;
-  transition: background 0.3s, color 0.3s;
-  color: #333;
+  transition: color 0.3s, background 0.3s;
+  color: #333; /* texto normal */
+  background-color: #fff; /* fondo siempre blanco */
 }
 
 .sidebar-item:hover {
-  background-color: #f1f1f1;
-  text-decoration: none;
+  color: #033B56; /* texto azul al hover */
+  background-color: #fff; /* fondo sigue blanco */
 }
 
 .active-link {
-  background-color: #e6f2ff;
+  color: #033B56; /* texto azul si está activo */
+  background-color: #fff; /* fondo blanco incluso activo */
   font-weight: 600;
+}
+
+/* Íconos */
+.nav-icon {
+  color: #333;
+  transition: color 0.3s;
+}
+
+.sidebar-item:hover .nav-icon,
+.active-link .nav-icon {
+  color: #033B56;
 }
 
 /* ===== FOOTER CONFIG ===== */
