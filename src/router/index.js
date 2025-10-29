@@ -4,6 +4,8 @@ import MainLayout from '../layouts/MainLayout.vue';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import CreateNewOrderView from '../views/CreateNewOrderView.vue';
+import OrderView from '../views/OrderView.vue';
 
 const routes = [
   // Ruta raíz redirige al login
@@ -34,6 +36,18 @@ const routes = [
         path: 'home',
         name: 'Home',
         component: HomeView,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'createNewOrder',
+        name: 'CreateNewOrder',
+        component: CreateNewOrderView,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'order',
+        name: 'OrderView',
+        component: OrderView,
         meta: { requiresAuth: true }
       },
       // Puedes agregar más rutas protegidas aquí

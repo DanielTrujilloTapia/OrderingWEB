@@ -2,9 +2,9 @@
   <header class="navbar sticky-top shadow-sm navbar-custom px-3 d-flex align-items-center justify-content-between">
     <!-- Izquierda: toggle y título -->
     <div class="d-flex align-items-center">
-      <!-- Botón toggle sidebar (solo mobile) -->
+      <!-- Botón toggle sidebar (siempre visible) -->
       <button 
-        class="btn btn-outline-secondary d-lg-none me-3 toggle-btn"
+        class="btn btn-outline-secondary me-3 toggle-btn"
         @click="$emit('toggleSidebar')"
         type="button"
         aria-label="Toggle sidebar"
@@ -63,7 +63,7 @@ export default {
 <style scoped>
 .navbar-custom {
   background-color: #fff;
-  min-height: 76px;
+  min-height: 61px;
   padding: 0.5rem 1rem;
   z-index: 1020;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
@@ -72,31 +72,32 @@ export default {
   align-items: center;
 }
 
+/* Botón del menú lateral */
 .toggle-btn {
   border: none;
   background-color: #f8f9fa;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 .toggle-btn:hover {
   background-color: #e2e6ea;
+  transform: scale(1.05);
 }
 
+/* Notificaciones */
 .btn-notification {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
 .btn-notification:hover {
   background-color: #f0f0f0;
   transform: translateY(-1px);
 }
 
+/* Usuario */
 .dropdown-toggle {
   background-color: var(--bs-dark);
   border-color: var(--bs-dark);
   transition: background-color 0.3s ease;
 }
-
 .dropdown-toggle:hover {
   background-color: #3e444a;
   border-color: #3e444a;
