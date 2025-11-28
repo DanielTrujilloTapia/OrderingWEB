@@ -6,6 +6,7 @@ import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import CreateNewOrderView from '../views/CreateNewOrderView.vue';
 import OrderView from '../views/OrderView.vue';
+import MessagesDashboardView from '../views/MessagesDashboardView.vue';
 
 const routes = [
   // Ruta raíz redirige al login
@@ -48,6 +49,12 @@ const routes = [
         path: 'order',
         name: 'OrderView',
         component: OrderView,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'MessagesDash',
+        name: 'MessagesDashboard',
+        component: MessagesDashboardView,
         meta: { requiresAuth: true }
       },
       // Puedes agregar más rutas protegidas aquí

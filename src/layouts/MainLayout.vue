@@ -98,9 +98,10 @@ export default {
           { name: 'Dashboard', path: '/app/home', icon: 'bi-grid-fill' },
           { name: 'Mis Ordenes', path: '/app/order', icon: 'bi-box-seam-fill'},
           { name: 'Nueva Orden', path: '/app/createNewOrder', icon: 'bi-basket3-fill'},
+          { name: 'Mensajes', path: '/app/MessagesDash', icon: 'bi-tag-fill' },
         ],
         management: [
-          { name: 'Productos', path: '/app/products', icon: 'bi-tag-fill' },
+          { name: 'Mensajes', path: '/app/MessagesDash', icon: 'bi-tag-fill' },
           { name: 'Inventario', path: '/app/inventory', icon: 'bi-boxes' },
           { name: 'Reportes', path: '/app/reports', icon: 'bi-bar-chart-line-fill' },
         ]
